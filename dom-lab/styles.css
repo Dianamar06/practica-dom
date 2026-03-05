@@ -1,0 +1,452 @@
+/* ══════════════════════════════════════════
+   BLUSH RIOT — Drop Panel
+   styles.css
+══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --pink:      #FF2D78;
+  --pink-dim:  #CC1F5E;
+  --pink-glow: rgba(255,45,120,.25);
+  --black:     #0A0A0A;
+  --card:      #111111;
+  --surface:   #1A1A1A;
+  --border:    #252525;
+  --white:     #F5F0EB;
+  --muted:     #666666;
+  --r:         14px;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 99px; }
+
+/* ─── Body ─── */
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--black);
+  color: var(--white);
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* Grain */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999;
+}
+
+/* ─── Navbar ─── */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+  background: rgba(10,10,10,.88);
+  backdrop-filter: blur(14px);
+  z-index: 100;
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: .08em;
+  color: var(--white);
+}
+.nav-logo span { color: var(--pink); }
+.nav-live {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .7rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.nav-live::before {
+  content: '';
+  width: 7px; height: 7px;
+  background: var(--pink);
+  border-radius: 50%;
+  animation: blink 1.4s ease-in-out infinite;
+}
+@keyframes blink {
+  0%,100% { opacity:1; }
+  50%      { opacity:.3; }
+}
+
+/* ─── Hero ─── */
+.hero {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 56px 40px 28px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: end;
+  overflow: hidden;
+}
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  letter-spacing: .04em;
+  line-height: .9;
+  color: var(--white);
+}
+.hero-title span { color: var(--pink); display: block; }
+.hero-sub {
+  margin-top: 16px;
+  font-size: .78rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero-blob {
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,45,120,.55) 0%, transparent 70%);
+  filter: blur(55px);
+  animation: drift 7s ease-in-out infinite alternate;
+  flex-shrink: 0;
+}
+@keyframes drift {
+  from { transform: scale(1) translate(0,0); }
+  to   { transform: scale(1.12) translate(18px,24px); }
+}
+
+/* ─── Stripes ─── */
+.stripes {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.stripes-line {
+  height: 1px;
+  background: repeating-linear-gradient(90deg, var(--pink) 0, var(--pink) 1px, transparent 1px, transparent 20px);
+  opacity: .25;
+  margin-bottom: 28px;
+}
+
+/* ─── Layout ─── */
+.content {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ─── Panel ─── */
+.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px;
+}
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.panel-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: .1em;
+  color: var(--white);
+}
+
+/* ─── Drop Featured (Parte A) ─── */
+#titulo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  letter-spacing: .06em;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+/* la clase .nota es el id del article en la práctica */
+.nota {
+  padding: 20px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  background: var(--surface);
+  transition: border-color .3s, box-shadow .3s;
+}
+.nota.destacada {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px var(--pink-glow), 0 0 40px rgba(255,45,120,.07);
+}
+
+.nota__heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: .06em;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.nota__texto {
+  font-size: .88rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+#imgNota {
+  width: 100%;
+  max-width: 300px;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  display: block;
+  margin-bottom: 10px;
+}
+.muted {
+  font-size: .75rem;
+  color: var(--muted);
+}
+#idInterno { color: var(--pink); font-weight: 500; }
+
+/* ─── Controls ─── */
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+/* ─── Buttons ─── */
+button {
+  font-family: 'DM Sans', sans-serif;
+  padding: 9px 18px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--white);
+  font-size: .82rem;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: .02em;
+  transition: border-color .2s, background .2s, transform .12s, box-shadow .2s;
+}
+button:hover {
+  border-color: var(--pink);
+  background: rgba(255,45,120,.06);
+  transform: translateY(-1px);
+}
+button:active { transform: translateY(0); }
+button.btn-pink {
+  background: var(--pink);
+  border-color: var(--pink);
+  color: var(--white);
+}
+button.btn-pink:hover {
+  background: var(--pink-dim);
+  box-shadow: 0 4px 20px var(--pink-glow);
+}
+button.btn-remove:hover {
+  border-color: var(--pink-dim);
+  background: rgba(204,31,94,.12);
+  color: var(--pink);
+}
+
+/* ─── Inputs ─── */
+input {
+  font-family: 'DM Sans', sans-serif;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--white);
+  font-size: .88rem;
+  outline: none;
+  min-width: 180px;
+  transition: border-color .2s, box-shadow .2s;
+}
+input::placeholder { color: #3a3a3a; }
+input:focus {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px var(--pink-glow);
+}
+
+/* ─── Lista (Parte B) ─── */
+.lista {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.item {
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--surface);
+  transition: border-color .25s, box-shadow .25s, transform .2s;
+}
+.item:hover { transform: translateX(3px); }
+.item.destacada {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px var(--pink-glow);
+}
+
+.item__title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: .06em;
+  color: var(--white);
+  display: block;
+  margin-bottom: 6px;
+}
+.item__meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.pill {
+  background: rgba(255,45,120,.1);
+  border: 1px solid rgba(255,45,120,.3);
+  color: var(--pink);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.actions button { padding: 6px 12px; font-size: .75rem; }
+
+/* Contador */
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px; height: 22px;
+  padding: 0 6px;
+  background: var(--pink);
+  color: var(--white);
+  border-radius: 99px;
+  font-size: .64rem;
+  font-weight: 700;
+  margin-left: 8px;
+  transition: transform .2s;
+}
+
+/* Estado vacío */
+.empty-state {
+  display: none;
+  text-align: center;
+  padding: 36px;
+  color: var(--muted);
+  font-size: .85rem;
+  border: 1.5px dashed var(--border);
+  border-radius: var(--r);
+}
+.empty-state strong {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: .08em;
+  color: var(--pink);
+  margin-bottom: 4px;
+}
+.empty-state.visible { display: block; }
+
+/* ─── Search (Parte C1) ─── */
+.search-wrap {
+  position: relative;
+  margin-bottom: 18px;
+}
+.search-wrap input { width: 100%; padding-left: 38px; }
+.search-icon {
+  position: absolute; left: 13px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted); font-size: .85rem; pointer-events: none;
+}
+
+/* ─── Storage bar (Parte C2) ─── */
+.storage-bar {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+}
+
+/* ─── XSS demo (Parte C3) ─── */
+.xss-wrap {
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+}
+.xss-label {
+  font-size: .68rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--pink);
+  margin-bottom: 10px;
+  display: block;
+}
+.xss-controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.xss-output {
+  padding: 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  min-height: 44px;
+  font-size: .85rem;
+  color: var(--muted);
+  background: var(--surface);
+  transition: border-color .3s;
+}
+
+/* ─── Toast ─── */
+.toast {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--pink);
+  color: var(--white);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: .82rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .25s, transform .25s;
+  pointer-events: none;
+  z-index: 9998;
+  max-width: 320px;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+  .navbar { padding: 16px 20px; }
+  .hero { padding: 36px 20px 20px; grid-template-columns: 1fr; }
+  .hero-blob { display: none; }
+  .stripes, .content { padding: 0 20px; }
+  .panel { padding: 18px; }
+  .item { flex-direction: column; }
+  .actions { width: 100%; justify-content: flex-end; }
+  input { min-width: 100%; }
+}

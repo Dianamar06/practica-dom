@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>BLUSH RIOT — Drop Panel</title>
+  <link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+
+<!-- ─── Navbar ─── -->
+<nav class="navbar">
+  <div class="nav-logo">BLUSH<span>RIOT</span></div>
+  <span class="nav-live">Drop activo · SS25</span>
+</nav>
+
+<!-- ─── Hero ─── -->
+<section class="hero">
+  <div>
+    <h1 class="hero-title">DROP<span>PANEL</span></h1>
+    <p class="hero-sub">Gestión de colección · Streetwear unisex · SS25</p>
+  </div>
+  <div class="hero-blob"></div>
+</section>
+
+<div class="stripes"><div class="stripes-line"></div></div>
+
+<div class="content">
+
+  <!-- ── Drop destacado ── -->
+  <!-- El id="nota", class="nota", data-id son exactamente los que pide la práctica -->
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-title">Drop en Vitrina</span>
+      <div class="controls" style="margin:0">
+        <button id="btnCambiarTitulo">Renombrar</button>
+        <button id="btnToggleDestacado">Toggle destacado</button>
+        <button id="btnCambiarImagen">Cambiar imagen</button>
+      </div>
+    </div>
+
+    <!-- Título dinámico — se actualiza con textContent -->
+    <h1 id="titulo">OVERSIZED RIOT TEE</h1>
+
+    <!-- article#nota · data-id leído con dataset -->
+    <article id="nota" class="nota" data-id="DROP-SS25-001">
+      <h2 class="nota__heading">Colección Primavera / Verano 2025</h2>
+      <p class="nota__texto">Pieza unisex de algodón orgánico. Corte oversized. Paleta monocromática con detalle gráfico en contraste. Edición limitada a 300 unidades.</p>
+      <img id="imgNota" alt="Drop SS25" width="300"
+           src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=600&q=80"/>
+      <p class="muted">Ref: <span id="idInterno"></span></p>
+    </article>
+  </div>
+
+  <!-- ── Gestor de drops ── -->
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-title">
+        Catálogo SS25
+        <span class="count-badge" id="counter">0</span>
+      </span>
+    </div>
+
+    <!-- Búsqueda local -->
+    <div class="search-wrap">
+      <span class="search-icon">✦</span>
+      <input id="inpBuscar" type="search" placeholder="Buscar por nombre o categoría…"/>
+    </div>
+
+    <!-- Formulario agregar — ids exactos de la práctica -->
+    <form id="formAdd" class="controls" autocomplete="off">
+      <input id="inpTitulo"  placeholder="Nombre del drop"       required/>
+      <input id="inpTag"     placeholder="Categoría (ej. Tops · SS25)" required/>
+      <button type="submit" class="btn-pink">+ Agregar</button>
+    </form>
+
+    <!-- Estado vacío -->
+    <div class="empty-state visible" id="emptyState">
+      <strong>Sin drops</strong>
+      Agrega el primero con el formulario.
+    </div>
+
+    <!-- Lista dinámica — id="lista" como pide la práctica -->
+    <ul class="lista" id="lista"></ul>
+
+    <!-- localStorage -->
+    <div class="storage-bar">
+      <button id="btnGuardar">💾 Guardar</button>
+      <button id="btnCargar">📂 Cargar</button>
+      <button id="btnBorrarStorage" class="btn-remove">🗑 Limpiar</button>
+    </div>
+  </div>
+
+  <!-- ── Seguridad DOM ── -->
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-title">Seguridad — innerHTML vs textContent</span>
+    </div>
+
+    <div class="xss-wrap" style="border:none;padding:0;margin:0">
+      <span class="xss-label">Escribe cualquier texto o etiqueta HTML y compara el resultado</span>
+      <div class="xss-controls">
+        <input id="inpXSS" placeholder='Prueba: <img src=x onerror=alert(1)>' style="flex:1;min-width:220px"/>
+        <button id="btnXSSInner" class="btn-remove">⚠ innerHTML</button>
+        <button id="btnXSSText"  class="btn-pink">✅ textContent</button>
+      </div>
+      <div class="xss-output" id="xssOutput">El resultado aparece aquí…</div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<div class="toast" id="toast"></div>
+<script src="./app.js"></script>
+</body>
+</html>
